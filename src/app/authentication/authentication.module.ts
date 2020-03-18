@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { SignInComponent } from './components/sign-in/sign-in.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { AuthenticationComponent } from './components/authentication/authentication.component';
 
+import { AuthenticationRoutingModule } from './authentication-routing.module';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -12,10 +14,8 @@ import { AuthenticationComponent } from './components/authentication/authenticat
     SignUpComponent,
     AuthenticationComponent],
   imports: [
-    CommonModule
-  ],
-  exports:[
-    AuthenticationComponent
+    SharedModule,
+    AuthenticationRoutingModule
   ]
 })
 export class AuthenticationModule { }
