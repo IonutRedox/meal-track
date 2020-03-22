@@ -1,5 +1,21 @@
-<div class="authentication">
-    <h2><a routerLink="/sign-in">Sign in</a></h2>
-    <h2><a routerLink="/sign-up">Sign up</a></h2>
-    <router-outlet></router-outlet>
-</div>
+<aside class="auth__side auth__presentation">
+    <h1>MealTrack</h1>
+    <h3>Nutrients on the way</h3>
+</aside>
+<main class="auth__side auth__container">
+    <div class="auth__form">
+        <nav class="form__navbar">
+            <div class="navbar__button navbar__button--pressed" (click)="click()"
+                [class.navbar__button--pressed]="isOpened">
+                <a routerLink="/sign-in">Sign in</a>
+            </div>
+            <div class="navbar__button  navbar__button--pressed" (click)="click()"
+                [class.navbar__button--pressed]="!isOpened">
+                <a routerLink="/sign-up">Sign up</a>
+            </div>
+        </nav>
+        <div class="form__content">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</main>
