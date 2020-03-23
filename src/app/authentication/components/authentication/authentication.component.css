@@ -9,6 +9,53 @@
 .auth__presentation{
     left:0;
     width: 70%;
+    background-image: url('../../../../assets/images/authentication/bg-auth-presentation.jpg');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: #464646;
+    text-align: center;
+}
+
+.auth__home{
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid whitesmoke;
+}
+
+.brand{
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+   width: 100%;
+   height: 50%;
+    margin: 0 auto;
+    padding: 1rem 1rem;
+}
+
+.brand__item{
+    text-transform: uppercase;
+    color: white;
+    opacity: 80%;
+    font-weight: lighter;
+    display: block;
+    margin: 0;
+}
+
+.brand__item-name{
+    font-family: Helvetica;
+    font-size: 3rem;
+    letter-spacing: .125em;
+}
+
+.brand__item-motto{
+    font-family: Helvetica;
+    font-size: 1.5rem;
+    letter-spacing: .5em;
 }
 
 .auth__container{
@@ -18,6 +65,8 @@
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
+    background-color: #464646;
+    text-align: center;
 }
 
 
@@ -27,6 +76,7 @@
     width: 80%;
     margin-top: 9em;
     border-radius: 1em;
+    background-color: #464646;
 }
 
 
