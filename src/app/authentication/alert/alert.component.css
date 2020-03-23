@@ -1,0 +1,19 @@
+.message{
+   width: 250px;
+   height:1.5em; 
+   display: flex;
+   align-items: center;
+   padding-left: 1em;
+}
+
+.message-success{
+    background-color: #ABFFA8;
+    color: #1C8D32;
+    border: 1px solid #1C8D32
+}
+
+.message-error{
+    background-color:#FFABAB;
+    color: rgb(163, 25, 25);
+    border: 1px solid rgb(163, 25, 25);
+}

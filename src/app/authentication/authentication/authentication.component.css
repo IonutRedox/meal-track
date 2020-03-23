@@ -9,7 +9,7 @@
 .auth__presentation{
     left:0;
     width: 70%;
-    background-image: url('../../../../assets/images/authentication/bg-auth-presentation.jpg');
+    background-image: url('../../../assets/images/authentication/bg-auth-presentation.jpg');
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -61,7 +61,7 @@
 .auth__container{
     right: 0;
     width: 30%;
-    background-image: url('../../../../assets/images/authentication/bg-auth-form.jpg');
+    background-image: url('../../../assets/images/authentication/bg-auth-form.jpg');
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -121,7 +121,7 @@
     display: block;;
 }
 
-.navbar_button > a:hover{
+.navbar__button > a:hover{
     background: rgb(52,237,33);
     background: radial-gradient(circle, rgba(52,237,33,1) 0%, rgba(21,196,4,1) 100%);
     color:#F0FBEF;
