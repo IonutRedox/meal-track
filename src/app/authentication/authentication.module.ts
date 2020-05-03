@@ -5,7 +5,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { AuthenticationComponent } from './authentication/authentication.component';
 
 import { AuthenticationRoutingModule } from './authentication-routing.module';
-import { SharedModule } from '../shared/shared.module';
+import { SharedModule } from '@app/shared/shared.module';
 
 
 

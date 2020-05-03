@@ -1,9 +1,12 @@
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser'
 
-import { AppComponent } from './app.component';
-import { AuthenticationModule } from './authentication/authentication.module';
-import { AppRoutingModule } from './app-routing.module';
-import { SharedModule } from './shared/shared.module';
+import { AppComponent } from '@app/app.component';
+
+import { AuthenticationModule } from '@app/authentication/authentication.module';
+import { AppRoutingModule } from '@app/app-routing.module';
+import { SharedModule } from '@app/shared/shared.module';
+import { CoreModule } from '@app/core/core.module';
 
 
 @NgModule({
@@ -11,6 +14,8 @@ import { SharedModule } from './shared/shared.module';
     AppComponent,
   ],
   imports: [
+    BrowserModule,
+    CoreModule,
     SharedModule,
     AuthenticationModule,
     AppRoutingModule

@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { SharedModule } from './shared/shared.module';
-import { PageNotFoundComponent } from './shared/components/page-not-found/page-not-found.component';
+import { SharedModule } from '@app/shared/shared.module';
+import { PageNotFoundComponent } from '@app/shared';
 
 
 
