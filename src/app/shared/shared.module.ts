@@ -3,20 +3,18 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { PageNotFoundComponent } from '@app/shared';
-import { AlertComponent } from '@app/shared';
 
 
 
 @NgModule({
-  declarations: [PageNotFoundComponent, AlertComponent],
+  declarations: [PageNotFoundComponent],
   imports: [
     CommonModule
   ],
   exports: [
     CommonModule,
     FormsModule,
-    PageNotFoundComponent,
-    AlertComponent
+    PageNotFoundComponent
   ]
 })
 export class SharedModule { }
