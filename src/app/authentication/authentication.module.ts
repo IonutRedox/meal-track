@@ -6,6 +6,7 @@ import { AuthenticationComponent } from './authentication/authentication.compone
 
 import { AuthenticationRoutingModule } from './authentication-routing.module';
 import { SharedModule } from '@app/shared/shared.module';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 
 
@@ -17,6 +18,8 @@ import { SharedModule } from '@app/shared/shared.module';
   ],
   imports: [
     SharedModule,
+    FormsModule,
+    ReactiveFormsModule,
     AuthenticationRoutingModule
   ]
 })
