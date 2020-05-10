@@ -11,11 +11,11 @@
         <nav class="form__navbar">
             <div class="navbar__button navbar__button--pressed" (click)="click()"
                 [class.navbar__button--pressed]="isOpened">
-                <a routerLink="/sign-in">Sign in</a>
+                <a routerLink="/auth/sign-in">Sign in</a>
             </div>
             <div class="navbar__button  navbar__button--pressed" (click)="click()"
                 [class.navbar__button--pressed]="!isOpened">
-                <a routerLink="/sign-up">Sign up</a>
+                <a routerLink="/auth/sign-up">Sign up</a>
             </div>
         </nav>
         <div class="form__content">

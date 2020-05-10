@@ -5,7 +5,6 @@ import { AppComponent } from '@app/app.component';
 import { MainPageComponent } from '@app/main-page/main-page.component';
 
 import { AuthenticationModule } from '@app/authentication/authentication.module';
-import { AppRoutingModule } from '@app/app-routing.module';
 import { SharedModule } from '@app/shared/shared.module';
 import { CoreModule } from '@app/core/core.module';
 import { StoreModule } from '@ngrx/store';
@@ -14,6 +13,20 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { CustomSerializer } from './shared/utils/custom-route-serializer';
 import { appReducers } from './app.state';
 import { EffectsModule } from '@ngrx/effects';
+import { Routes, RouterModule } from '@angular/router';
+import { PageNotFoundComponent } from './shared';
+
+
+const appRoutes: Routes = [
+  {
+    path: '',
+    component: MainPageComponent
+  },
+  {
+    path: '**',
+    component: PageNotFoundComponent
+  }
+];
 
 @NgModule({
   declarations: [
@@ -25,7 +38,7 @@ import { EffectsModule } from '@ngrx/effects';
     CoreModule,
     SharedModule,
     AuthenticationModule,
-    AppRoutingModule,
+    RouterModule.forRoot(appRoutes),
     EffectsModule.forRoot([]),
     StoreModule.forRoot(appReducers),
     StoreDevtoolsModule.instrument({ maxAge: 25 }),
