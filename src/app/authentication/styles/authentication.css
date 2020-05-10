@@ -70,3 +70,19 @@
     color:#E21111;
 }
 
+.form__result{
+    width: 100%;
+    margin:0 auto;
+    color: black;
+}
+
+.failure{
+    background-color:#F11D1D;
+    border: 1px solid #AA1111;
+}
+
+.success{
+   background-color:#82EA04 ;
+   border:1px solid #5C9F0B;
+}
+

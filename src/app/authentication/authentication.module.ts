@@ -7,6 +7,11 @@ import { AuthenticationComponent } from './authentication/authentication.compone
 import { AuthenticationRoutingModule } from './authentication-routing.module';
 import { SharedModule } from '@app/shared/shared.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { StoreModule } from '@ngrx/store';
+
+import { authenticationReducer } from './store/reducers/authentication.reducers';
+import { EffectsModule } from '@ngrx/effects';
+import { AuthenticationEffects } from './store/effects/authentication.effects';
 
 
 
@@ -19,6 +24,8 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
   imports: [
     SharedModule,
     FormsModule,
+    StoreModule.forFeature('authentication', authenticationReducer),
+    EffectsModule.forFeature([AuthenticationEffects]),
     ReactiveFormsModule,
     AuthenticationRoutingModule
   ]

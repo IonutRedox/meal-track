@@ -19,6 +19,6 @@
             </div>
         </div>
     </div>
-
+    <div *ngIf="errorMessage" [ngClass]="{'form__result failure': errorMessage}">{{ errorMessage }}.</div>
     <input type="submit" value="Sign in" class="form__button">
 </form>

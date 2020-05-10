@@ -10,8 +10,10 @@ import { SharedModule } from '@app/shared/shared.module';
 import { CoreModule } from '@app/core/core.module';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { StoreRouterConnectingModule, routerReducer } from '@ngrx/router-store';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { CustomSerializer } from './shared/utils/custom-route-serializer';
+import { appReducers } from './app.state';
+import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,8 @@ import { CustomSerializer } from './shared/utils/custom-route-serializer';
     SharedModule,
     AuthenticationModule,
     AppRoutingModule,
-    StoreModule.forRoot({}),
+    EffectsModule.forRoot([]),
+    StoreModule.forRoot(appReducers),
     StoreDevtoolsModule.instrument({ maxAge: 25 }),
     StoreRouterConnectingModule.forRoot({ serializer: CustomSerializer })
   ],

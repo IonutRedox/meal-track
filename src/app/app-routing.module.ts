@@ -3,13 +3,18 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { SharedModule } from '@app/shared/shared.module';
 import { PageNotFoundComponent } from '@app/shared';
+import { MainPageComponent } from '@app/main-page/main-page.component';
 
 
 
 const appRoutes: Routes = [
     {
         path: '',
-        loadChildren: () => import('./authentication/authentication.module').then(m => m.AuthenticationModule)
+        loadChildren: () => import('@app/authentication/authentication.module').then(m => m.AuthenticationModule)
+    },
+    {
+        path: 'main',
+        component: MainPageComponent
     },
     {
         path: '**',

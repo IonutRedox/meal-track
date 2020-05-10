@@ -1,0 +1,19 @@
+import { createAction, props } from '@ngrx/store';
+import { User } from '@app/core/models/user.model';
+
+export enum AuthenticationActionTypes {
+    SIGN_IN = '[Authentication] Sign in',
+    SIGN_IN_SUCCESS = '[Authentication] Sign in Success',
+    SIGN_IN_FAILURE = '[Authentication] Sign in Failure',
+    CHECK_SIGNED_IN = '[Authentication] Check signed in',
+    CHECK_SIGNED_IN_SUCCESS = '[Authentication] Check signed in success',
+    SIGN_UP = '[Authentication] Sign up',
+    SIGN_UP_SUCCESS = '[Authentication] Sign up Success',
+    SIGN_UP_FAILURE = '[Authentication] Sign up Failure',
+    SIGN_OUT = '[Authentication] Sign out'
+}
+
+export const signIn = createAction(AuthenticationActionTypes.SIGN_IN, props<{ user: User }>());
+export const signInSuccess = createAction(AuthenticationActionTypes.SIGN_IN_SUCCESS, props<{ user: User }>());
+export const signInFailure = createAction(AuthenticationActionTypes.SIGN_IN_FAILURE, props<{ error: string }>());
+export const signOut = createAction(AuthenticationActionTypes.SIGN_OUT);
