@@ -4,4 +4,5 @@ export interface AuthenticationState {
     isAuthenticated: boolean;
     user: User | null;
     errorMessage: string | null;
+    registerMessage: string | null;
 }

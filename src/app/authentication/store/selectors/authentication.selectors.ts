@@ -6,3 +6,4 @@ export const getAuthentication = createFeatureSelector<AppState, AuthenticationS
 export const getAuthenticationError = createSelector(getAuthentication, (state: AuthenticationState) => state.errorMessage);
 export const getAuthenticationUser = createSelector(getAuthentication, (state: AuthenticationState) => state.user);
 export const getAuthenticationStatus = createSelector(getAuthentication, (state: AuthenticationState) => state.isAuthenticated);
+export const getAuthenticationRegisterMessage = createSelector(getAuthentication, (state: AuthenticationState) => state.registerMessage);

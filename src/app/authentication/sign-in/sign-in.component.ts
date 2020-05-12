@@ -13,7 +13,7 @@ import * as  fromAuthentication from '@app/authentication/store';
 export class SignInComponent implements OnInit {
   signInForm: FormGroup;
   submitted = false;
-  errorMessage: string = null;
+  errorMessage: string;
   isAuthenticated: boolean;
 
   constructor(private formBuilder: FormBuilder, private store: Store<AppState>) { }
@@ -23,6 +23,7 @@ export class SignInComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
     });
+    this.store.dispatch(fromAuthentication.clear());
     this.store.select(fromAuthentication.getAuthenticationError).subscribe(errorMessage => this.errorMessage = errorMessage);
     this.store.select(fromAuthentication.getAuthenticationStatus).subscribe(isAuthenticated => this.isAuthenticated = isAuthenticated);
   }
@@ -31,7 +32,7 @@ export class SignInComponent implements OnInit {
     return this.signInForm.controls;
   }
 
-  submit() {
+  signIn() {
     this.submitted = true;
     if (this.signInForm.invalid) {
       return;
@@ -40,7 +41,6 @@ export class SignInComponent implements OnInit {
       email: this.signInForm.get('email').value,
       password: this.signInForm.get('password').value
     }
-
     this.store.dispatch(fromAuthentication.signIn({ user: user }));
   }
 }

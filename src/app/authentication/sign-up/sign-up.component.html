@@ -1,4 +1,4 @@
-<form [formGroup]="signUpForm" class="form" (ngSubmit)="submit()">
+<form [formGroup]="signUpForm" class="form" (ngSubmit)="signUp()">
     <div class="form-item">
         <input type="text" autofocus placeholder="Email" formControlName="email"
             [ngClass]="(submitted && f.email.errors) ? 'form__input error':'form__input' ">
@@ -41,7 +41,7 @@
             </div>
         </div>
     </div>
-   <!-- <div *ngIf="resultMessage" [ngClass]="(errorMessage) ? :'form__result failure' : 'form__result success'">
-        {{ resultMessage }}</div> -->
+    <div *ngIf="registerMessage" [ngClass]="{'form__result success': registerMessage}">{{ registerMessage }}.</div>
+    <div *ngIf="errorMessage" [ngClass]="{'form__result failure': errorMessage}">{{ errorMessage }}.</div>
     <input type="submit" name="submit" value="Sign up" class="form__button">
 </form>
