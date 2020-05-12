@@ -15,12 +15,14 @@ import { appReducers } from './app.state';
 import { EffectsModule } from '@ngrx/effects';
 import { Routes, RouterModule } from '@angular/router';
 import { PageNotFoundComponent } from './shared';
+import { AuthenticationGuard } from './core/guard/authentication.guard';
 
 
 const appRoutes: Routes = [
   {
     path: '',
-    component: MainPageComponent
+    component: MainPageComponent,
+    canActivate: [AuthenticationGuard]
   },
   {
     path: '**',
