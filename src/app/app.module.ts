@@ -14,6 +14,7 @@ import { CustomSerializer } from './shared/utils/custom-route-serializer';
 import { appReducers } from './app.state';
 import { EffectsModule } from '@ngrx/effects';
 import { Routes, RouterModule } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http'; 
 import { PageNotFoundComponent } from './shared';
 import { AuthenticationGuard } from './core/guard/authentication.guard';
 
@@ -39,6 +40,7 @@ const appRoutes: Routes = [
     BrowserModule,
     CoreModule,
     SharedModule,
+    HttpClientModule,
     AuthenticationModule,
     RouterModule.forRoot(appRoutes),
     EffectsModule.forRoot([]),

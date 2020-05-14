@@ -4,7 +4,7 @@ import { AuthenticationService } from '@app/core';
 import { Router } from '@angular/router';
 import { createEffect, ofType } from '@ngrx/effects';
 import { map, switchMap, catchError, tap } from 'rxjs/operators';
-import { signInSuccess, signInFailure, AuthenticationActionTypes, signIn } from '@app/authentication/store/actions/authentication.actions';
+import { signInSuccess, signInFailure, signIn, signUpSuccess, signUp, signUpFailure } from '@app/authentication/store/actions/authentication.actions';
 import { User } from '@app/core/models/user.model';
 import { of } from 'rxjs';
 
@@ -26,7 +26,7 @@ export class AuthenticationEffects {
                     return signInSuccess({ user: user });
                 }),
                 catchError((error) => {
-                    return of(signInFailure({ error: error }));
+                    return of(signInFailure({ error: error.error.message }));
                 }));
         })));
 
@@ -34,9 +34,21 @@ export class AuthenticationEffects {
         ofType(signInSuccess),
         map((action) => action.user),
         tap((user: User) => {
-            localStorage.setItem('token', user.token);
-            localStorage.setItem('email', user.email);
-            this.router.navigateByUrl('/main');
+            localStorage.setItem('user_access_token', user.token);
+            this.router.navigateByUrl('/');
         })
     ), { dispatch: false });
-}
+
+    signUp$ = createEffect(() => this.actions$.pipe(
+        ofType(signUp),
+        map((action) => action.user),
+        switchMap((user: User) => {
+            return this.authenticationService.signUp(user).pipe(
+                map((user: User) => {
+                    return signUpSuccess({ user: user, registerMessage: 'Successful registered' });
+                }),
+                catchError((error) => {
+                    return of(signUpFailure({ error: error.error.message }));
+                }));
+        }))); 
+    }

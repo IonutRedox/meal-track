@@ -1,10 +1,14 @@
 import { NgModule, Optional, SkipSelf } from '@angular/core';
 
 import { AlertService } from '@app/core';
+import { AuthenticationService } from '@app/core';
 
 
 @NgModule({
-  providers: [AlertService]
+  providers: [
+    AlertService,
+    AuthenticationService
+  ]
 })
 export class CoreModule {
   constructor(@Optional() @SkipSelf() parentModule: CoreModule) {
