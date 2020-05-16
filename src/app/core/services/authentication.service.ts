@@ -11,7 +11,8 @@ export class AuthenticationService {
   constructor(private httpClient: HttpClient) { }
 
   getAccessToken(): string {
-    return localStorage.getItem('user_access_token');
+    let user = JSON.parse(localStorage.getItem('user'));
+    return user?.token;
   }
 
   isAuthenticated() {
@@ -27,7 +28,11 @@ export class AuthenticationService {
   }
 
   signUp(user: User) {
-    let signUpUrl = this.url+'/sign-up';
-    return this.httpClient.post(signUpUrl,user,this.jsonHeader);
+    let signUpUrl = this.url + '/sign-up';
+    return this.httpClient.post(signUpUrl, user, this.jsonHeader);
+  }
+
+  signOut() {
+    localStorage.removeItem('user');
   }
 }

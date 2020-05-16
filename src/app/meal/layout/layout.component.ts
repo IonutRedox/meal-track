@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AppState } from '@app/app.state';
+import { Store } from '@ngrx/store';
+import { User } from '@app/core/models/user.model';
+import { signOut } from '@app/authentication/store';
 
 @Component({
   selector: 'app-layout',
@@ -7,10 +11,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./layout.component.css']
 })
 export class LayoutComponent implements OnInit {
-  selectedButton = null;
+  selectedButton: any;
   navButtons: any[];
+  currentUser: User;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private store: Store<AppState>) { }
 
   ngOnInit(): void {
     this.navButtons = [
@@ -19,9 +24,21 @@ export class LayoutComponent implements OnInit {
       { name: 'Sign out', url: '/sign-out' }
     ];
     this.selectedButton = this.navButtons.find(btn => btn.url === this.router.url);
+    this.getUser();
   }
 
   selectPage(navButton: any) {
     this.selectedButton = navButton;
+    if (this.selectedButton.name === 'Sign out') {
+      this.signOut();
+    }
+  }
+
+  getUser() {
+    this.currentUser = JSON.parse(localStorage.getItem('user'));
+  }
+
+  signOut() {
+    this.store.dispatch(signOut());
   }
 }

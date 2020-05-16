@@ -1,5 +1,8 @@
 <div id="side-nav">
-    <a *ngFor="let navButton of navButtons" (click)="selectPage(navButton)" routerLink="{{navButton.url}}"
+    <div class="user">
+        <div class="user-fullName">{{ currentUser.fullName }}</div>
+    </div>
+    <a *ngFor="let navButton of navButtons" (click)="selectPage(navButton)" routerLink="{{ navButton.url }}"
         [ngClass]="(selectedButton == navButton) ? 'side-nav-button button-pressed' : 'side-nav-button' ">{{navButton.name}}</a>
 </div>
 

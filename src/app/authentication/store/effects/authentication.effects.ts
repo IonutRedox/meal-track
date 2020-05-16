@@ -4,7 +4,7 @@ import { AuthenticationService } from '@app/core';
 import { Router } from '@angular/router';
 import { createEffect, ofType } from '@ngrx/effects';
 import { map, switchMap, catchError, tap } from 'rxjs/operators';
-import { signInSuccess, signInFailure, signIn, signUpSuccess, signUp, signUpFailure } from '@app/authentication/store/actions/authentication.actions';
+import { signInSuccess, signInFailure, signIn, signUpSuccess, signUp, signUpFailure, signOut } from '@app/authentication/store/actions/authentication.actions';
 import { User } from '@app/core/models/user.model';
 import { of } from 'rxjs';
 
@@ -34,7 +34,7 @@ export class AuthenticationEffects {
         ofType(signInSuccess),
         map((action) => action.user),
         tap((user: User) => {
-            localStorage.setItem('user_access_token', user.token);
+            localStorage.setItem('user', JSON.stringify(user));
             this.router.navigateByUrl('/');
         })
     ), { dispatch: false });
@@ -50,5 +50,12 @@ export class AuthenticationEffects {
                 catchError((error) => {
                     return of(signUpFailure({ error: error.error.message }));
                 }));
-        }))); 
-    }
+        })));
+
+    signOut$ = createEffect(() => this.actions$.pipe(
+        ofType(signOut),
+        tap(() => {
+            this.authenticationService.signOut();
+            this.router.navigateByUrl('/auth');
+        })), { dispatch: false });
+}
