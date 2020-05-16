@@ -1,0 +1,43 @@
+#side-nav {
+    height: 100%;
+    width: 200px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #125B3B;
+    overflow-x: hidden;
+    padding-top: 20px;
+  }
+
+  .side-nav-button {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 19px;
+    color: #E0E0E0;
+    height: 30px;
+    line-height: 35px;
+    margin:0 auto;
+    font-family: Helvetica;
+    display: block;
+    cursor: pointer;
+  }
+  
+  .side-nav-button:hover {
+    color: white;
+    background-color: #227350;
+  }
+
+  .button-pressed{
+    pointer-events: none;;
+    color: white;
+    border-right:5px solid white;
+    background-color: #125B3B;
+  }
+  
+  .content {
+    margin-left: 200px; /* Same as the width of the sidenav */
+    font-size: 28px; /* Increased text to enable scrolling */
+    padding: 0px 10px;
+    background-color: red;
+  }

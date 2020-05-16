@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser'
 
 import { AppComponent } from '@app/app.component';
-import { MainPageComponent } from '@app/main-page/main-page.component';
 
 import { AuthenticationModule } from '@app/authentication/authentication.module';
 import { SharedModule } from '@app/shared/shared.module';
@@ -10,21 +9,15 @@ import { CoreModule } from '@app/core/core.module';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
-import { CustomSerializer } from './shared/utils/custom-route-serializer';
-import { appReducers } from './app.state';
+import { CustomSerializer } from '@app/shared/utils/custom-route-serializer';
+import { appReducers } from '@app/app.state';
 import { EffectsModule } from '@ngrx/effects';
 import { Routes, RouterModule } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http'; 
-import { PageNotFoundComponent } from './shared';
-import { AuthenticationGuard } from './core/guard/authentication.guard';
-
+import { HttpClientModule } from '@angular/common/http';
+import { PageNotFoundComponent } from '@app/shared';
+import { MealModule } from '@app/meal/meal.module';
 
 const appRoutes: Routes = [
-  {
-    path: '',
-    component: MainPageComponent,
-    canActivate: [AuthenticationGuard]
-  },
   {
     path: '**',
     component: PageNotFoundComponent
@@ -34,7 +27,6 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    MainPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,6 +34,7 @@ const appRoutes: Routes = [
     SharedModule,
     HttpClientModule,
     AuthenticationModule,
+    MealModule,
     RouterModule.forRoot(appRoutes),
     EffectsModule.forRoot([]),
     StoreModule.forRoot(appReducers),

@@ -1,0 +1,8 @@
+<div id="side-nav">
+    <a *ngFor="let navButton of navButtons" (click)="selectPage(navButton)" routerLink="{{navButton.url}}"
+        [ngClass]="(selectedButton == navButton) ? 'side-nav-button button-pressed' : 'side-nav-button' ">{{navButton.name}}</a>
+</div>
+
+<div class="content">
+    <router-outlet></router-outlet>
+</div>
