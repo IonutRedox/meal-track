@@ -1,62 +1,54 @@
-#side-nav {
-    height: 100%;
-    width: 200px;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    background-color: #125B3B;
-    overflow-x: hidden;
-    padding-top: 20px;
+body {
+  overflow-x: hidden;
+}
+
+.disabled{
+  border-right: 2px solid teal;
+  background-color: white;
+}
+
+#sidebar-wrapper {
+  min-height: 100vh;
+  margin-left: -15rem;
+  -webkit-transition: margin .25s ease-out;
+  -moz-transition: margin .25s ease-out;
+  -o-transition: margin .25s ease-out;
+  transition: margin .25s ease-out;
+}
+
+#sidebar-wrapper .sidebar-heading {
+  padding: 0.875rem 1.25rem;
+  font-size: 1.2rem;
+}
+
+#sidebar-wrapper .user{
+  width: 15rem;
+  margin-bottom: 20px;
+}
+
+#sidebar-wrapper .list-group {
+  width: 15rem;
+}
+
+#page-content-wrapper {
+  min-width: 100vw;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+  margin-left: 0;
+}
+
+@media (min-width: 768px) {
+  #sidebar-wrapper {
+    margin-left: 0;
   }
 
-  .user{
-    width: 200px;
-    margin: 0 auto;
-    padding-bottom: 50px;
+  #page-content-wrapper {
+    min-width: 0;
+    width: 100%;
   }
 
-  .user-fullName{
-    font-family: Helvetica;
-    text-align: center;
-    font-size: 17px;
-    font-weight: lighter;
-    color: whitesmoke;
+  #wrapper.toggled #sidebar-wrapper {
+    margin-left: -15rem;
   }
-
-  .side-nav-button {
-    padding: 6px 8px 6px 16px;
-    text-decoration: none;
-    font-size: 19px;
-    color: #E0E0E0;
-    height: 30px;
-    line-height: 35px;
-    margin:0 auto;
-    font-family: Helvetica;
-    display: block;
-    cursor: pointer;
-  }
-  
-  .side-nav-button:hover {
-    color: white;
-    background-color: #227350;
-  }
-
-  .side-nav-button:focus{
-    color: #E0E0E0;
-    background-color: #0B492E;
-  }
-
-  .button-pressed{
-    pointer-events: none;;
-    color: white;
-    border-right:5px solid white;
-    background-color: #0B492E;
-  }
-  
-  .content {
-    margin-left: 200px; /* Same as the width of the sidenav */
-    font-size: 28px; /* Increased text to enable scrolling */
-    padding: 0px 10px;
-    background-color: red;
-  }
+}

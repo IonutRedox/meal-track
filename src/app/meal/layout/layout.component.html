@@ -1,11 +1,39 @@
-<div id="side-nav">
-    <div class="user">
-        <div class="user-fullName">{{ currentUser.fullName }}</div>
-    </div>
-    <a *ngFor="let navButton of navButtons" (click)="selectPage(navButton)" routerLink="{{ navButton.url }}"
-        [ngClass]="(selectedButton == navButton) ? 'side-nav-button button-pressed' : 'side-nav-button' ">{{navButton.name}}</a>
-</div>
+<!DOCTYPE html>
+<html lang="en">
 
-<div class="content">
-    <router-outlet></router-outlet>
-</div>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+</head>
+
+<body>
+    <div class="d-flex" id="wrapper">
+        <div class="bg-light border-right" id="sidebar-wrapper">
+            <div class="sidebar-heading">MealTrack</div>
+            
+            <div class="card user">
+                <img class="card-img-top">
+                <div class="card-body">
+                  <p class="card-text">{{ currentUser.fullName }}</p>
+                </div>
+              </div>
+              
+
+            <div class="list-group list-group-flush">
+                <a *ngFor="let navButton of navButtons" (click)="selectPage(navButton)" routerLink="{{ navButton.url }}"
+                    [ngClass]="(selectedButton == navButton) ? 'list-group-item list-group-item-action disabled' : 'list-group-item list-group-item-action bg-light' ">{{navButton.name}}</a>
+            </div>
+        </div>
+
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
