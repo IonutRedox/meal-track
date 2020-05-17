@@ -3,8 +3,27 @@ body {
 }
 
 .disabled{
-  border-right: 2px solid teal;
+  border-right: 3px solid teal;
   background-color: white;
+}
+
+.logo{
+  text-align: center;
+  margin-bottom: 10px;
+  padding-top:10px;
+  padding-bottom: 5px;
+}
+.logo-title{
+  line-height: 80%;
+ padding:0;
+ margin:0;
+}
+
+.logo-motto{
+  padding:0;
+  margin:0;
+  font-size: 12.5px;
+  text-transform: uppercase;
 }
 
 #sidebar-wrapper {
@@ -21,9 +40,21 @@ body {
   font-size: 1.2rem;
 }
 
-#sidebar-wrapper .user{
-  width: 15rem;
+#sidebar-wrapper .card-user{
+  width: 12rem;
+  margin:0 auto;
   margin-bottom: 20px;
+}
+
+#sidebar-wrapper .card-img-top{
+  background-color: gray;
+  height: 100px;
+}
+
+.card-body{
+  text-align: center;
+  padding-bottom: 3px;
+  padding-top:3px;
 }
 
 #sidebar-wrapper .list-group {

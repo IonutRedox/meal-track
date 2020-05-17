@@ -11,15 +11,17 @@
 <body>
     <div class="d-flex" id="wrapper">
         <div class="bg-light border-right" id="sidebar-wrapper">
-            <div class="sidebar-heading">MealTrack</div>
-            
-            <div class="card user">
-                <img class="card-img-top">
+            <div class="logo">
+                <div class="h2 logo-title">MealTrack</div>
+                <h6 class="logo-motto">Nutrients on the way</h6>
+            </div>
+            <div class="card card-user">
+                <div class="card-img-top"></div>
                 <div class="card-body">
-                  <p class="card-text">{{ currentUser.fullName }}</p>
+                    <p class="card-text">{{ currentUser.fullName }}</p>
                 </div>
-              </div>
-              
+            </div>
+
 
             <div class="list-group list-group-flush">
                 <a *ngFor="let navButton of navButtons" (click)="selectPage(navButton)" routerLink="{{ navButton.url }}"

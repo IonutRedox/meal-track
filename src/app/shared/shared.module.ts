@@ -7,7 +7,9 @@ import { PageNotFoundComponent } from '@app/shared';
 
 
 @NgModule({
-  declarations: [PageNotFoundComponent],
+  declarations: [
+    PageNotFoundComponent
+  ],
   imports: [
     CommonModule
   ],
