@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { FoodService } from '@app/core/services/food.service';
-import * as FoodActions from '@app/meal/store/actions/food.actions';
 import { catchError, switchMap, map } from 'rxjs/operators';
 import { of } from 'rxjs';
+
+import { FoodService } from '@app/core';
+import * as FoodActions from '@app/meal/store/actions/food.actions';
 
 @Injectable()
 export class FoodEffects {

@@ -1,13 +1,13 @@
 import { AuthenticationState } from '@app/authentication/authentication.state';
 import { createReducer, on, Action } from '@ngrx/store';
-import * as AuthenticationActions from '../actions/authentication.actions';
+import * as AuthenticationActions from '../actions/authentication.actions'
 import { AppState } from '@app/app.state';
 
 const initialState: AuthenticationState = {
-    user: null,
+    user: undefined,
     isAuthenticated: false,
-    errorMessage: null,
-    registerMessage: null
+    errorMessage: '',
+    registerMessage: ''
 };
 
 const reducer = createReducer(

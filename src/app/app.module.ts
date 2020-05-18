@@ -1,20 +1,19 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser'
-
-import { AppComponent } from '@app/app.component';
-
-import { AuthenticationModule } from '@app/authentication/authentication.module';
-import { SharedModule } from '@app/shared/shared.module';
-import { CoreModule } from '@app/core/core.module';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
-import { CustomSerializer } from '@app/shared/utils/custom-route-serializer';
 import { EffectsModule } from '@ngrx/effects';
 import { Routes, RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
-import { PageNotFoundComponent } from '@app/shared';
+
+import { AppComponent } from '@app/app.component';
+import { CustomSerializer, PageNotFoundComponent } from '@app/shared';
+import { AuthenticationModule } from '@app/authentication/authentication.module';
+import { SharedModule } from '@app/shared/shared.module';
+import { CoreModule } from '@app/core/core.module';
 import { MealModule } from '@app/meal/meal.module';
+
 
 const appRoutes: Routes = [
   {

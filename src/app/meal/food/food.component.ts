@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Food } from '@app/core/models/food.model';
 import { AppState } from '@app/app.state';
 import { Store } from '@ngrx/store';
-import { getFoods } from '../store/selectors/food.selectors';
-import { loadFoods } from '../store/actions/food.actions';
+import { Food } from '@app/core';
+import { getFoods, loadFoods } from '@app/meal/store';
 
 @Component({
   selector: 'app-food',

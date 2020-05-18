@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store'
-import { Food } from '@app/core/models/food.model';
+import { Food } from '@app/core';
 
 export const FoodActionTypes = {
     LOAD_FOODS: '[Food] Load Foods',

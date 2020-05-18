@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { mustMatch } from '@app/shared/utils/form-utils';
+import { mustMatch } from '@app/shared';
 import { AppState } from '@app/app.state';
 import { Store } from '@ngrx/store';
-import { User } from '@app/core/models/user.model';
+import { User } from '@app/core';
 import * as fromAuthentication from '@app/authentication/store';
 
 @Component({

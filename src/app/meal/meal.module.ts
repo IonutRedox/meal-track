@@ -1,18 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { Routes, RouterModule } from '@angular/router';
-
-import { LayoutComponent } from '@app/meal/layout/layout.component';
-import { FoodComponent } from '@app/meal/food/food.component';
-import { DashboardComponent } from '@app/meal/dashboard/dashboard.component';
-import { AuthenticationGuard } from '@app/core/guard/authentication.guard';
-import { FoodItemComponent } from './food-item/food-item.component';
-import { SharedModule } from '@app/shared/shared.module';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { FoodEffects } from './store/effects/food.effects';
-import { mealReducers } from './store/meal.state';
+
+import { LayoutComponent,
+         FoodComponent,
+         DashboardComponent,
+         FoodItemComponent,
+         FoodEffects,
+         mealReducers } from '@app/meal';
+import { SharedModule } from '@app/shared/shared.module';
+import { AuthenticationGuard } from '@app/core';
+
 
 const mealRoutes: Routes = [
   {

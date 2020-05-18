@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AppState } from '@app/app.state';
 import { Store } from '@ngrx/store';
-import { User } from '@app/core/models/user.model';
-import { signOut } from '@app/authentication/store';
+
+import { AppState } from '@app/app.state';
+import { User } from '@app/core';
+import { signOut } from '@app/authentication';
 
 @Component({
   selector: 'app-layout',
