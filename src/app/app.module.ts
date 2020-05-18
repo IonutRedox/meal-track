@@ -10,7 +10,6 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { CustomSerializer } from '@app/shared/utils/custom-route-serializer';
-import { appReducers } from '@app/app.state';
 import { EffectsModule } from '@ngrx/effects';
 import { Routes, RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
@@ -37,7 +36,7 @@ const appRoutes: Routes = [
     MealModule,
     RouterModule.forRoot(appRoutes),
     EffectsModule.forRoot([]),
-    StoreModule.forRoot(appReducers),
+    StoreModule.forRoot({}),
     StoreDevtoolsModule.instrument({ maxAge: 25 }),
     StoreRouterConnectingModule.forRoot({ serializer: CustomSerializer })
   ],

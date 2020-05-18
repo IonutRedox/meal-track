@@ -7,12 +7,14 @@
             <div class="card-body">
                 <h5 class="card-title">{{ food.title }}</h5>
                 <p class="card-text nutrients-title"><strong>Nutrients per 100 g:</strong></p>
-                <p class="card-text">Protein &nbsp;<span
+                <p class="card-text">Protein &nbsp;&nbsp;&nbsp;<span
                         class="badge badge-pill badge-success">{{ food.protein + ' g' }}</span></p>
-                <p class="card-text">Fats &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+                <p class="card-text">Fats &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
                         class="badge badge-pill badge-success">{{ food.fats + ' g' }}</span></p>
-                <p class="card-text">Carbs &nbsp;&nbsp;&nbsp;<span
+                <p class="card-text">Carbs &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
                         class="badge badge-pill badge-success">{{ food.carbs + ' g' }}</span></p>
+                <p class="card-text">Calories &nbsp;<span
+                        class="badge badge-pill badge-danger">{{ food.calories + ' kcal' }}</span></p>
             </div>
         </div>
     </div>

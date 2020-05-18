@@ -9,6 +9,10 @@ import { DashboardComponent } from '@app/meal/dashboard/dashboard.component';
 import { AuthenticationGuard } from '@app/core/guard/authentication.guard';
 import { FoodItemComponent } from './food-item/food-item.component';
 import { SharedModule } from '@app/shared/shared.module';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { FoodEffects } from './store/effects/food.effects';
+import { mealReducers } from './store/meal.state';
 
 const mealRoutes: Routes = [
   {
@@ -34,7 +38,9 @@ const mealRoutes: Routes = [
   imports: [
     CommonModule,
     SharedModule,
-    RouterModule.forChild(mealRoutes)
+    RouterModule.forChild(mealRoutes),
+    StoreModule.forFeature('meal', mealReducers),
+    EffectsModule.forFeature([FoodEffects])
   ]
 })
 export class MealModule { }
