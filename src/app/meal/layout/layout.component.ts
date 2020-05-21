@@ -22,6 +22,7 @@ export class LayoutComponent implements OnInit {
     this.navButtons = [
       { name: 'Dashboard', url: '/dashboard' },
       { name: "Food", url: '/food' },
+      { name: 'Meal', url: '/meal' },
       { name: 'Sign out', url: '/sign-out' }
     ];
     this.selectedButton = this.navButtons.find(btn => btn.url === this.router.url);

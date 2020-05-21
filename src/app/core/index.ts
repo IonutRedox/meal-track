@@ -4,4 +4,6 @@ export * from './services/authentication.service';
 export * from './services/image.service';
 export * from './guard/authentication.guard';
 export * from './models/food.model';
+export * from './models/food-portion.model';
 export * from './models/user.model';
+export * from './models/meal.model';

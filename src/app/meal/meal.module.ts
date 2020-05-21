@@ -4,14 +4,18 @@ import { Routes, RouterModule } from '@angular/router';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
-import { LayoutComponent,
-         FoodComponent,
-         DashboardComponent,
-         FoodItemComponent,
-         FoodEffects,
-         mealReducers } from '@app/meal';
+import {
+  LayoutComponent,
+  FoodComponent,
+  DashboardComponent,
+  FoodItemComponent,
+  MealListComponent,
+  FoodEffects,
+  mealReducers
+} from '@app/meal';
 import { SharedModule } from '@app/shared/shared.module';
 import { AuthenticationGuard } from '@app/core';
+import { MealComponent } from './meal/meal.component';
 
 
 const mealRoutes: Routes = [
@@ -22,6 +26,7 @@ const mealRoutes: Routes = [
     children: [
       { path: 'dashboard', component: DashboardComponent },
       { path: 'food', component: FoodComponent },
+      { path: 'meal', component: MealListComponent },
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
     ]
   }
@@ -33,7 +38,9 @@ const mealRoutes: Routes = [
     LayoutComponent,
     FoodComponent,
     DashboardComponent,
-    FoodItemComponent
+    FoodItemComponent,
+    MealListComponent,
+    MealComponent,
   ],
   imports: [
     CommonModule,
