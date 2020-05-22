@@ -1,5 +1,6 @@
 import { Food } from '..';
 
-export interface FoodPortion extends Food {
+export interface FoodPortion {
+    food: Food;
     quantity: number;
 }

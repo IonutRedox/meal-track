@@ -1,13 +1,13 @@
-<div #modalMealForm class="container-fluid">
+<div class="container-fluid">
     <h2 class="display-4 mt-2" style="font-size: 30px;">
         <strong>Add or edit meal</strong>
     </h2>
     <hr class="solid pt-0 mt-0">
-    <form>
+    <form #mealForm="ngForm">
         <div class="form-group row">
-            <label for="inputTitle" class="col-sm-2 col-form-label">Title</label>
+            <label for="title" class="col-sm-2 col-form-label">Title</label>
             <div class="col-sm-10">
-                <input class="form-control" id="inputTitle" value="{{ meal.title }}" placeholder="Title">
+                <input class="form-control" id="title" [(ngModel)]="meal.title" name="title" placeholder="Title">
             </div>
         </div>
         <div class="form-group row">
@@ -28,16 +28,26 @@
                             <th scope="col">Carbs</th>
                             <th scope="col">Calories</th>
                             <th scope="col">Quantity</th>
+                            <th scope="col">Delete?</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let foodPortion of meal.foodPortions">
-                            <td>{{ foodPortion.title }}</td>
-                            <td>{{ foodPortion.protein + ' g' }}</td>
-                            <td>{{ foodPortion.fats +' g' }}</td>
-                            <td>{{ foodPortion.carbs + ' g' }}</td>
-                            <td>{{ foodPortion.calories +' kcal' }}</td>
+                        <tr *ngFor="let foodPortion of meal.foodPortions;let i=index" id="foodPortion-row">
+                            <td>{{ foodPortion.food.title }}</td>
+                            <td>{{ foodPortion.food.protein + ' g' }}</td>
+                            <td>{{ foodPortion.food.fats +' g' }}</td>
+                            <td>{{ foodPortion.food.carbs + ' g' }}</td>
+                            <td>{{ foodPortion.food.calories +' kcal' }}</td>
                             <td>{{ foodPortion.quantity + ' g'}}</td>
+                            <td><button class="btn btn-danger btn-delete" (click)="onDeleteFoodPortion(i)">X</button>
+                            </td>
+                        </tr>
+                        <tr *ngIf="meal.foodPortions.length == 0">
+                            <td colspan="7">
+                                <h3 class="display-4 text-center" style="color: gray; font-size: 20px;">
+                                    No food portion found
+                                </h3>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -47,20 +57,25 @@
             <label for="newPortion" class="col-sm-2 col-form-label">New portion</label>
             <div class="col-sm-10 d-flex justify-content-between align-items-center">
                 <div class="input-group mr-2">
-                    <select class="custom-select">
-                        <option select>Choose food...</option>
-                        <option *ngFor="let food of meal.foodPortions" [ngValue]="food">{{ food.title }}
+                    <select [(ngModel)]="selectedFood" name="selectedFood" class="custom-select">
+                        <option>Choose food...</option>
+                        <option *ngFor="let food of availableFoods" [ngValue]="food">
+                            {{ food.title }}
                         </option>
                     </select>
                 </div>
-                <input class="form-control mr-2" id="inputQuantity" placeholder="Quantity">
-                <button class="btn btn-primary" style="background-color: teal;">Add</button>
+                <input class="form-control mr-2" type="number" id="inputQuantity" [(ngModel)]="selectedQuantity"
+                    name="selectedQuantity" placeholder="Quantity">
+                <button class="btn btn-primary" [disabled]='!canAddFoodPortion()' style="background-color: teal;"
+                    (click)="onAddFoodPortion()">Add</button>
             </div>
         </div>
         <div class="form-group row">
             <div class="container-fluid d-flex justify-content-end align-items-center">
-                <button class="btn btn-primary mr-2" style="background-color: teal;" (click)="save()">Save</button>
-                <button class="btn btn-secondary" (click)="{}" #cancelButton data-dismiss="modal">Cancel</button>
+                <button class="btn btn-primary mr-2" style="background-color: teal;" [disabled]="!canSave()"
+                    (click)="onSave()">Save</button>
+                <button class="btn btn-secondary" (click)="onCancel()" #cancelButton
+                    data-dismiss="modal">Cancel</button>
             </div>
         </div>
     </form>

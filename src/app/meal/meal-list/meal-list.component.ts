@@ -1,5 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Meal } from '@app/core';
+import { NgbModal, ModalDismissReasons, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-meal-list',
@@ -9,37 +10,40 @@ import { Meal } from '@app/core';
 export class MealListComponent implements OnInit {
   selectedMeal: Meal;
   meals: Meal[];
+
   constructor() { }
 
   ngOnInit(): void {
-    this.meals = [
-      { id: '1', title: 'mealA', calories: 300, foodPortions: [] },
-      { id: '2', title: 'mealB', calories: 1083, foodPortions: [] },
-      { id: '3', title: 'mealC', calories: 993, foodPortions: [] },
-      { id: '4', title: 'mealD', calories: 183, foodPortions: [] },
-      { id: '5', title: 'mealE', calories: 83, foodPortions: [] },
-      { id: '6', title: 'mealF', calories: 444, foodPortions: [] }
-    ];
+    this.select(null);
   }
 
-  created(meal: Meal) {
-    this.meals.push(meal);
-    this.selectedMeal = null;
+  saved(meal: Meal) {
+    const index = this.meals.findIndex(m => m.id === meal.id);
+    if (index === -1) {
+      this.meals.push(meal);
+    } else {
+      this.meals[index] = meal;
+    }
+    this.select(null);
   }
 
-  edited(meal: Meal) {
-    const mealToUpdate = this.meals.find(meal => meal.id === this.selectedMeal.id);
-    const index = this.meals.indexOf(mealToUpdate);
-    this.meals[index] = meal;
-    this.selectedMeal = meal;
+  cancelled(notification: any) {
+    this.select(null);
   }
 
-  onDelete(meal: Meal) {
-    this.meals = this.meals.filter(m => m !== meal);
+  onDelete(index: number) {
+    this.meals.splice(index, 1);
   }
 
   onEdit(meal: Meal) {
-    this.selectedMeal = meal;
+    this.select(meal);
   }
 
+  select(meal: Meal) {
+    if (meal == null) {
+      this.selectedMeal = new Meal(Math.random().toString(), '', []);
+    } else {
+      this.selectedMeal = new Meal(meal.id, meal.title, JSON.parse(JSON.stringify(meal.foodPortions)));
+    }
+  }
 }
