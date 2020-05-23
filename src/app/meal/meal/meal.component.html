@@ -59,7 +59,7 @@
                 <div class="input-group mr-2">
                     <select [(ngModel)]="selectedFood" name="selectedFood" class="custom-select">
                         <option>Choose food...</option>
-                        <option *ngFor="let food of availableFoods" [ngValue]="food">
+                        <option *ngFor="let food of availableFoods$ | async" [ngValue]="food">
                             {{ food.title }}
                         </option>
                     </select>

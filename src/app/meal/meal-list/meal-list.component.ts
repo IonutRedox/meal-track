@@ -3,6 +3,11 @@ import {
   Meal,
   ProcessedMeal
 } from '@app/core';
+import { Observable } from 'rxjs';
+import { AppState } from '@app/app.state';
+import { Store } from '@ngrx/store';
+import * as MealsActions from '@app/meal/store/actions/meals.actions';
+import { getMeals } from '@app/meal/store/selectors/meals.selectors';
 
 @Component({
   selector: 'app-meal-list',
@@ -11,22 +16,19 @@ import {
 })
 export class MealListComponent implements OnInit {
   processingMeal: ProcessedMeal;
-  meals: Meal[] = [];
+  meals$: Observable<Meal[]>;
 
-  constructor() { }
+  constructor(private store: Store<AppState>) { }
 
   ngOnInit(): void {
-
+    this.getMeals();
   }
 
   saved(meal: ProcessedMeal) {
     if (meal.id == '') {
-      
+      this.store.dispatch(MealsActions.createMeal({ meal: meal }));
     } else {
-      const mealToUpdate = this.meals.find(m => m.id == meal.id);
-      const index = this.meals.indexOf(mealToUpdate);
-      this.meals[index] = meal;
-
+      this.store.dispatch(MealsActions.updateMeal({ meal: meal }));
     }
   }
 
@@ -34,10 +36,8 @@ export class MealListComponent implements OnInit {
     this.setProcessingMeal(null);
   }
 
-  onDelete(index: number) {
-    const meal = this.meals[index];
-    this.meals.splice(index, 1);
-    
+  onDelete(meal: Meal) {
+    this.store.dispatch(MealsActions.deleteMeal({ meal: meal }));
   }
 
   onEdit(meal: Meal) {
@@ -54,5 +54,10 @@ export class MealListComponent implements OnInit {
     } else {
       this.processingMeal = new ProcessedMeal(meal.id, meal.title, JSON.parse(JSON.stringify(meal.foodPortions)), meal.calories);
     }
+  }
+
+  getMeals() {
+    this.store.dispatch(MealsActions.loadMeals());
+    this.meals$ = this.store.select(getMeals);
   }
 }

@@ -11,6 +11,7 @@ import {
   FoodItemComponent,
   MealListComponent,
   FoodEffects,
+  MealsEffects,
   mealReducers
 } from '@app/meal';
 import { SharedModule } from '@app/shared/shared.module';
@@ -47,7 +48,7 @@ const mealRoutes: Routes = [
     SharedModule,
     RouterModule.forChild(mealRoutes),
     StoreModule.forFeature('meal', mealReducers),
-    EffectsModule.forFeature([FoodEffects])
+    EffectsModule.forFeature([FoodEffects, MealsEffects])
   ]
 })
 export class MealModule { }

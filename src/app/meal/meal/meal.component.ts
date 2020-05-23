@@ -1,10 +1,14 @@
-import { Component, OnInit, Output, EventEmitter, Input, ViewChild, OnDestroy } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, ViewChild } from '@angular/core';
 import {
   Meal,
   FoodPortion,
   Food,
   ProcessedMeal
 } from '@app/core';
+import { AppState } from '@app/app.state';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { loadFoods, getFoods } from '../store';
 
 @Component({
   selector: 'app-meal',
@@ -17,13 +21,14 @@ export class MealComponent implements OnInit {
   @Output() cancelled = new EventEmitter<any>();
   @ViewChild('cancelButton') cancelButton;
 
-  availableFoods: Food[];
+  availableFoods$: Observable<Food[]>;
   selectedFood: any;
   selectedQuantity: number;
 
-  constructor() { }
+  constructor(private store: Store<AppState>) { }
 
   ngOnInit(): void {
+    this.getAvailableFoods();
     this.meal = new ProcessedMeal('', '', [], 0);
     this.resetNewFoodPortion();
   }
@@ -61,5 +66,10 @@ export class MealComponent implements OnInit {
   resetNewFoodPortion() {
     this.selectedFood = 'Choose food...';
     this.selectedQuantity = 0;
+  }
+
+  getAvailableFoods() {
+    this.store.dispatch(loadFoods());
+    this.availableFoods$ = this.store.select(getFoods);
   }
 }
