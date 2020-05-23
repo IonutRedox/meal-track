@@ -1,17 +1,18 @@
 import { NgModule, Optional, SkipSelf } from '@angular/core';
 
-import { AlertService } from '@app/core';
-import { AuthenticationService } from '@app/core';
-import { FoodService } from '@app/core/services/food.service';
-import { ImageService } from '@app/core/services/image.service';
-
+import {
+  AuthenticationService,
+  FoodService,
+  ImageService,
+  MealService
+} from '@app/core';
 
 @NgModule({
   providers: [
-    AlertService,
     AuthenticationService,
     FoodService,
-    ImageService
+    ImageService,
+    MealService
   ]
 })
 export class CoreModule {

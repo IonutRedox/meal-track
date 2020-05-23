@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Meal } from '@app/core';
-import { NgbModal, ModalDismissReasons, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
+import {
+  Meal,
+  ProcessedMeal
+} from '@app/core';
 
 @Component({
   selector: 'app-meal-list',
@@ -8,42 +10,49 @@ import { NgbModal, ModalDismissReasons, NgbModalOptions } from '@ng-bootstrap/ng
   styleUrls: ['./meal-list.component.css']
 })
 export class MealListComponent implements OnInit {
-  selectedMeal: Meal;
-  meals: Meal[];
+  processingMeal: ProcessedMeal;
+  meals: Meal[] = [];
 
   constructor() { }
 
   ngOnInit(): void {
-    this.select(null);
+
   }
 
-  saved(meal: Meal) {
-    const index = this.meals.findIndex(m => m.id === meal.id);
-    if (index === -1) {
-      this.meals.push(meal);
+  saved(meal: ProcessedMeal) {
+    if (meal.id == '') {
+      
     } else {
+      const mealToUpdate = this.meals.find(m => m.id == meal.id);
+      const index = this.meals.indexOf(mealToUpdate);
       this.meals[index] = meal;
+
     }
-    this.select(null);
   }
 
   cancelled(notification: any) {
-    this.select(null);
+    this.setProcessingMeal(null);
   }
 
   onDelete(index: number) {
+    const meal = this.meals[index];
     this.meals.splice(index, 1);
+    
   }
 
   onEdit(meal: Meal) {
-    this.select(meal);
+    this.setProcessingMeal(meal);
   }
 
-  select(meal: Meal) {
+  onCreate() {
+    this.setProcessingMeal(null);
+  }
+
+  setProcessingMeal(meal: Meal) {
     if (meal == null) {
-      this.selectedMeal = new Meal(Math.random().toString(), '', []);
+      this.processingMeal = new ProcessedMeal('', '', [], 0);
     } else {
-      this.selectedMeal = new Meal(meal.id, meal.title, JSON.parse(JSON.stringify(meal.foodPortions)));
+      this.processingMeal = new ProcessedMeal(meal.id, meal.title, JSON.parse(JSON.stringify(meal.foodPortions)), meal.calories);
     }
   }
 }

@@ -1,5 +1,10 @@
 import { Component, OnInit, Output, EventEmitter, Input, ViewChild, OnDestroy } from '@angular/core';
-import { Meal, FoodPortion, Food } from '@app/core';
+import {
+  Meal,
+  FoodPortion,
+  Food,
+  ProcessedMeal
+} from '@app/core';
 
 @Component({
   selector: 'app-meal',
@@ -7,7 +12,7 @@ import { Meal, FoodPortion, Food } from '@app/core';
   styleUrls: ['./meal.component.css']
 })
 export class MealComponent implements OnInit {
-  @Input() meal: Meal;
+  @Input() meal: ProcessedMeal;
   @Output() saved = new EventEmitter<Meal>();
   @Output() cancelled = new EventEmitter<any>();
   @ViewChild('cancelButton') cancelButton;
@@ -19,6 +24,7 @@ export class MealComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    this.meal = new ProcessedMeal('', '', [], 0);
     this.resetNewFoodPortion();
   }
 
