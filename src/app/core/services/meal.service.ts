@@ -11,15 +11,15 @@ export class MealService {
   constructor(private httpClient: HttpClient) { }
 
   getMeals(): Observable<Meal[]> {
-    return this.httpClient.get<Meal[]>(this.url, this.jsonHeader);
+    return this.httpClient.get<Meal[]>(this.getUrlWithUserId(), this.jsonHeader);
   }
 
   createMeal(meal: Meal): Observable<any> {
-    return this.httpClient.post(this.url, meal, this.jsonHeader);
+    return this.httpClient.post(this.getUrlWithUserId(), meal, this.jsonHeader);
   }
 
   updateMeal(meal: Meal): Observable<any> {
-    return this.httpClient.put(this.url, meal, this.jsonHeader);
+    return this.httpClient.put(this.getUrlWithUserId(), meal, this.jsonHeader);
   }
 
   deleteMeal(meal: Meal): Observable<any> {
@@ -27,4 +27,8 @@ export class MealService {
     return this.httpClient.delete(mealUrl);
   }
 
+  private getUrlWithUserId() {
+    const userId = JSON.parse(localStorage.getItem('user')).id;
+    return this.url + '/' + userId;
+  }
 }

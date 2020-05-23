@@ -15,7 +15,7 @@
                 {{ meal.title }}
             </div>
             <div class="d-flex column-meal">
-                <span class="badge badge-danger badge-pill" id="calories">{{ meal.calories }}</span>
+                <span class="badge badge-danger" id="calories">{{ meal.calories+ ' kcal' }}</span>
             </div>
             <div class="d-flex edit-delete">
                 <button class="btn btn-primary btn-edit" (click)="onEdit(meal)" data-toggle="modal"

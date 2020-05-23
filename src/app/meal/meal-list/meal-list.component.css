@@ -13,6 +13,11 @@
     padding-top:10px;
 }
 
+#calories{
+    width: 70px;
+    font-size: 13px;
+}
+
 #btn-create{
     background-color: teal;
 }

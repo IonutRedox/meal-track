@@ -15,7 +15,7 @@ export class ProcessedMeal implements Meal {
     }
 
     getCalories() {
-        const value = this.foodPortions.reduce((acc, curr) => acc + (curr.quantity * curr.food.calories) / 100, 0).toFixed(2);
+        const value = this.foodPortions.reduce((acc, curr) => acc + (curr.quantity * curr.food.calories) / 100, 0).toFixed(0);
         this.calories = Number(value);
         return this.calories;
     }
