@@ -6,6 +6,7 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { EffectsModule } from '@ngrx/effects';
 import { Routes, RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
+import { MDBBootstrapModule,ChartsModule } from 'angular-bootstrap-md';
 
 import { AppComponent } from '@app/app.component';
 import { CustomSerializer, PageNotFoundComponent } from '@app/shared';
@@ -31,6 +32,8 @@ const appRoutes: Routes = [
     CoreModule,
     SharedModule,
     HttpClientModule,
+    MDBBootstrapModule.forRoot(),
+    ChartsModule,
     AuthenticationModule,
     MealModule,
     RouterModule.forRoot(appRoutes),

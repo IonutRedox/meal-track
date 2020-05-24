@@ -4,7 +4,14 @@ body {
 
 .disabled{
   border-right: 3px solid teal;
-  background-color: white;
+}
+
+.nav-btn{
+  background-color: transparent;
+}
+
+.nav-btn:hover{
+  background-color: #e0e0e0;
 }
 
 .logo{
@@ -27,6 +34,7 @@ body {
 }
 
 #sidebar-wrapper {
+  background-color: #eeeeee;
   min-height: 100vh;
   margin-left: -15rem;
   -webkit-transition: margin .25s ease-out;

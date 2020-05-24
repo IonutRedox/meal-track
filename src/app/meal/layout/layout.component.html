@@ -10,7 +10,7 @@
 
 <body>
     <div class="d-flex" id="wrapper">
-        <div class="bg-light border-right" id="sidebar-wrapper">
+        <div class="border-right" id="sidebar-wrapper">
             <div class="logo">
                 <div class="h2 logo-title">MealTrack</div>
                 <h6 class="logo-motto">Nutrients on the way</h6>
@@ -25,7 +25,7 @@
 
             <div class="list-group list-group-flush">
                 <a *ngFor="let navButton of navButtons" (click)="selectPage(navButton)" routerLink="{{ navButton.url }}"
-                    [ngClass]="(selectedButton == navButton) ? 'list-group-item list-group-item-action disabled' : 'list-group-item list-group-item-action bg-light' ">{{navButton.name}}</a>
+                    [ngClass]="(selectedButton == navButton) ? 'list-group-item list-group-item-action nav-btn disabled' : 'list-group-item list-group-item-action nav-btn' ">{{navButton.name}}</a>
             </div>
         </div>
 

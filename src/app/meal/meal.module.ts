@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
+import { ChartsModule } from 'angular-bootstrap-md';
 
 import {
   LayoutComponent,
@@ -45,6 +46,7 @@ const mealRoutes: Routes = [
   ],
   imports: [
     CommonModule,
+    ChartsModule,
     SharedModule,
     RouterModule.forChild(mealRoutes),
     StoreModule.forFeature('meal', mealReducers),

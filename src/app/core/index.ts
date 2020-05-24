@@ -8,3 +8,5 @@ export * from './models/food-portion.model';
 export * from './models/user.model';
 export * from './models/meal.model';
 export * from './models/processed-meal.model';
+export * from './models/average-nutrients-intake.model';
+export * from './models/chart.model';
