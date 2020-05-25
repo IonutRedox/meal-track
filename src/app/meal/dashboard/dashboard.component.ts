@@ -1,5 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { AveragenutrientsIntake, Chart } from '@app/core';
+import { Chart } from '@app/core';
+import { AppState } from '@app/app.state';
+import { Store } from '@ngrx/store';
+import { loadStatistics } from '../store/actions/dashboard.actions';
+import { Observable, of } from 'rxjs';
+import {
+  getChartDatasets,
+  getChartOptions
+} from '@app/meal/store';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,28 +15,34 @@ import { AveragenutrientsIntake, Chart } from '@app/core';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  averageNutrientsIntake: AveragenutrientsIntake;
+  chartDatasets$: Observable<Array<any>>;
+  chartOptions$: Observable<any>;
+  
+  chartOptions: any;
   chart: Chart;
 
-  constructor() { }
+  constructor(private store: Store<AppState>) { }
 
   ngOnInit(): void {
+    this.chart = new Chart();
     this.initializeChart();
+    this.loadStatistics();
+  }
+
+  loadStatistics() {
+    this.store.dispatch(loadStatistics());
+    this.chartDatasets$ = this.store.select(getChartDatasets);
+    this.chartOptions$ = this.store.select(getChartOptions);
+    this.chartOptions$.subscribe(options => {
+      if (options) {
+        this.chart.options = options;
+        this.initializeChart();
+      }
+    })
   }
 
   initializeChart() {
-    this.chart = new Chart();
     this.chart.type = 'bar';
-    this.chart.dataSets = [
-      {
-        data: [
-          this.averageNutrientsIntake.protein,
-          this.averageNutrientsIntake.fats,
-          this.averageNutrientsIntake.carbs,
-        ],
-        label: 'Average nutrients intake'
-      }
-    ];
     this.chart.labels = ['Protein', 'Fats', 'Carbs'];
     this.chart.colors = [
       {
@@ -45,11 +59,5 @@ export class DashboardComponent implements OnInit {
         borderWidth: 2,
       }
     ];
-    this.chart.options = {
-      responsive: true,
-      scales: {
-        yAxes: [{id: 'y-axis-1', type: 'linear', position: 'left', ticks: {min: 0, max:200}}]
-      }
-    };
   }
 }

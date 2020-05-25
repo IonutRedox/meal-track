@@ -4,7 +4,8 @@ import {
   AuthenticationService,
   FoodService,
   ImageService,
-  MealService
+  MealService,
+  DashboardService
 } from '@app/core';
 
 @NgModule({
@@ -12,7 +13,8 @@ import {
     AuthenticationService,
     FoodService,
     ImageService,
-    MealService
+    MealService,
+    DashboardService
   ]
 })
 export class CoreModule {
