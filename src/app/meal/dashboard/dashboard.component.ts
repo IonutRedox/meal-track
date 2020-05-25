@@ -3,10 +3,9 @@ import { Chart } from '@app/core';
 import { AppState } from '@app/app.state';
 import { Store } from '@ngrx/store';
 import { loadStatistics } from '../store/actions/dashboard.actions';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import {
-  getChartDatasets,
-  getChartOptions
+  getChartSettings
 } from '@app/meal/store';
 
 @Component({
@@ -15,10 +14,7 @@ import {
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  chartDatasets$: Observable<Array<any>>;
-  chartOptions$: Observable<any>;
-  
-  chartOptions: any;
+  chartSettings$: Observable<any>;
   chart: Chart;
 
   constructor(private store: Store<AppState>) { }
@@ -31,13 +27,11 @@ export class DashboardComponent implements OnInit {
 
   loadStatistics() {
     this.store.dispatch(loadStatistics());
-    this.chartDatasets$ = this.store.select(getChartDatasets);
-    this.chartOptions$ = this.store.select(getChartOptions);
-    this.chartOptions$.subscribe(options => {
-      if (options) {
-        this.chart.options = options;
-        this.initializeChart();
-      }
+    this.chartSettings$ = this.store.select(getChartSettings);
+    this.chartSettings$.subscribe(settings => {
+      this.chart.dataSets = settings.dataSets;
+      this.chart.options = settings.options;
+      this.initializeChart();
     })
   }
 
