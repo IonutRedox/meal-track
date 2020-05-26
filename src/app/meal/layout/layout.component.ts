@@ -21,6 +21,7 @@ export class LayoutComponent implements OnInit {
   ngOnInit(): void {
     this.navButtons = [
       { name: 'Dashboard', url: '/dashboard' },
+      { name: 'Profile', url: '/profile' },
       { name: "Food", url: '/food' },
       { name: 'Meal', url: '/meal' },
       { name: 'Sign out', url: '/sign-out' }

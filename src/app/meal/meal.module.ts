@@ -19,6 +19,8 @@ import {
 import { SharedModule } from '@app/shared/shared.module';
 import { AuthenticationGuard } from '@app/core';
 import { MealComponent } from './meal/meal.component';
+import { ProfileComponent } from './profile/profile.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 const mealRoutes: Routes = [
@@ -28,6 +30,7 @@ const mealRoutes: Routes = [
     canActivate: [AuthenticationGuard],
     children: [
       { path: 'dashboard', component: DashboardComponent },
+      { path: 'profile', component: ProfileComponent },
       { path: 'food', component: FoodComponent },
       { path: 'meal', component: MealListComponent },
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
@@ -44,9 +47,12 @@ const mealRoutes: Routes = [
     FoodItemComponent,
     MealListComponent,
     MealComponent,
+    ProfileComponent,
   ],
   imports: [
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
     ChartsModule,
     SharedModule,
     RouterModule.forChild(mealRoutes),
