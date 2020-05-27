@@ -7,7 +7,7 @@ const initialState: AuthenticationState = {
     user: undefined,
     isAuthenticated: false,
     errorMessage: '',
-    registerMessage: ''
+    successMessage: ''
 };
 
 const reducer = createReducer(
@@ -25,12 +25,12 @@ const reducer = createReducer(
     on(AuthenticationActions.signUpSuccess, (state, { user, registerMessage }) => ({
         ...state,
         errorMessage: null,
-        registerMessage: registerMessage
+        successMessage: registerMessage
     })),
     on(AuthenticationActions.signUpFailure, (state, { error }) => ({
         ...state,
         errorMessage: error,
-        registerMessage: null
+        successMessage: null
     })),
     on(AuthenticationActions.signOut, (state) => ({
         ...state,
@@ -42,7 +42,21 @@ const reducer = createReducer(
         user: null,
         isAuthenticated: false,
         errorMessage: null,
-        registerMessage: null
+        successMessage: null
+    })),
+    on(AuthenticationActions.updateSuccess, (state, { user, updatedMessage }) => ({
+        ...state,
+        user: user,
+        successMessage: updatedMessage
+    })),
+    on(AuthenticationActions.updateFailure, (state, { error }) => ({
+        ...state,
+        errorMessage: error
+    })),
+    on(AuthenticationActions.clearMessages, (state) => ({
+        ...state,
+        errorMessage: null,
+        successMessage: null
     }))
 );
 

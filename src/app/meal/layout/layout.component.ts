@@ -4,7 +4,8 @@ import { Store } from '@ngrx/store';
 
 import { AppState } from '@app/app.state';
 import { User } from '@app/core';
-import { signOut } from '@app/authentication';
+import { signOut, getAuthenticationUser } from '@app/authentication';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-layout',
@@ -14,20 +15,16 @@ import { signOut } from '@app/authentication';
 export class LayoutComponent implements OnInit {
   selectedButton: any;
   navButtons: any[];
+  currentUser$: Observable<User>;
   currentUser: User;
+
 
   constructor(private router: Router, private store: Store<AppState>) { }
 
   ngOnInit(): void {
-    this.navButtons = [
-      { name: 'Dashboard', url: '/dashboard' },
-      { name: 'Profile', url: '/profile' },
-      { name: "Food", url: '/food' },
-      { name: 'Meal', url: '/meal' },
-      { name: 'Sign out', url: '/sign-out' }
-    ];
+    this.setupNavMenu();
     this.selectedButton = this.navButtons.find(btn => btn.url === this.router.url);
-    this.getUser();
+    this.getCurrentUser();
   }
 
   selectPage(navButton: any) {
@@ -37,8 +34,30 @@ export class LayoutComponent implements OnInit {
     }
   }
 
-  getUser() {
-    this.currentUser = JSON.parse(localStorage.getItem('user'));
+  setupNavMenu() {
+    this.navButtons = [
+      { name: 'Dashboard', url: '/dashboard' },
+      { name: 'Profile', url: '/profile' },
+      { name: "Food", url: '/food' },
+      { name: 'Meal', url: '/meal' },
+      { name: 'Sign out', url: '/sign-out' }
+    ];
+  }
+
+  getCurrentUser() {
+    this.currentUser$ = this.store.select(getAuthenticationUser);
+    this.currentUser$.subscribe(newUser => {
+      if (newUser) {
+        this.currentUser = { ...newUser, image: this.getRefreshingURL(newUser.image) };
+      } else {
+        const localUser = JSON.parse(localStorage.getItem('user'));
+        this.currentUser = { ...localUser, image: this.getRefreshingURL(localUser.image) }
+      }
+    })
+  }
+
+  getRefreshingURL(image: string) {
+    return image + '?' + (new Date().getTime());;
   }
 
   signOut() {

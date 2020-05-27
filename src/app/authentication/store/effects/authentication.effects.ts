@@ -19,10 +19,9 @@ export class AuthenticationEffects {
 
     signIn$ = createEffect(() => this.actions$.pipe(
         ofType(AuthenticationActions.signIn),
-        map((action) => action.user),
-        switchMap((user: User) => {
+        switchMap(({ user }) => {
             return this.authenticationService.signIn(user.email, user.password).pipe(
-                map((user) => {
+                map((user: User) => {
                     return AuthenticationActions.signInSuccess({ user: user });
                 }),
                 catchError((error) => {
@@ -41,8 +40,7 @@ export class AuthenticationEffects {
 
     signUp$ = createEffect(() => this.actions$.pipe(
         ofType(AuthenticationActions.signUp),
-        map((action) => action.user),
-        switchMap((user: User) => {
+        switchMap(({ user }) => {
             return this.authenticationService.signUp(user).pipe(
                 map((user: User) => {
                     return AuthenticationActions.signUpSuccess({ user: user, registerMessage: 'Successful registered' });
@@ -58,4 +56,25 @@ export class AuthenticationEffects {
             this.authenticationService.signOut();
             this.router.navigateByUrl('/auth');
         })), { dispatch: false });
+
+
+    update$ = createEffect(() => this.actions$.pipe(
+        ofType(AuthenticationActions.update),
+        switchMap(({ userData }) => {
+            return this.authenticationService.update(userData).pipe(
+                map((user: User) => {
+                    const currentUser = JSON.parse(localStorage.getItem('user')) as User;
+                    const updatedUser = {
+                        ...currentUser,
+                        email: user.email,
+                        fullName: user.fullName,
+                        image: user.image
+                    };
+                    localStorage.setItem('user', JSON.stringify(updatedUser));
+                    return AuthenticationActions.updateSuccess({ user: user, updatedMessage: 'You have successfully updated the profile' });
+                }),
+                catchError((error) => {
+                    return of(AuthenticationActions.signInFailure({ error: error.error.message }));
+                }));
+        })));
 }

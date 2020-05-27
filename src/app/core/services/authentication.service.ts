@@ -32,6 +32,11 @@ export class AuthenticationService {
     return this.httpClient.post(signUpUrl, user, this.jsonHeader);
   }
 
+  update(userData: any) {
+    const updateUrl = this.url + '/update/' + JSON.parse(localStorage.getItem('user')).id;
+    return this.httpClient.post(updateUrl, userData);
+  }
+
   signOut() {
     localStorage.removeItem('user');
   }

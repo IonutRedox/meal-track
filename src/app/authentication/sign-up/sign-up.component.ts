@@ -30,7 +30,7 @@ export class SignUpComponent implements OnInit {
     });
     this.store.dispatch(fromAuthentication.clear());
     this.store.select(fromAuthentication.getAuthenticationError).subscribe(errorMessage => this.errorMessage = errorMessage);
-    this.store.select(fromAuthentication.getAuthenticationRegisterMessage).subscribe(message => {
+    this.store.select(fromAuthentication.getAuthenticationSuccess).subscribe(message => {
       this.registerMessage = message;
       if (this.registerMessage) {
         this.clearForm();

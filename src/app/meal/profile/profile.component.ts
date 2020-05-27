@@ -1,22 +1,37 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { mustMatch } from '@app/shared';
+import { User } from '@app/core';
+import { AppState } from '@app/app.state';
+import { Store } from '@ngrx/store';
+import { update, getAuthenticationUser, getAuthenticationSuccess, clearMessages } from '@app/authentication';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent implements OnInit, OnDestroy {
   profileForm: FormGroup;
   changePassword: boolean = false;
-  image: any;
-  fileChooser: any;
 
-  constructor(private formBuilder: FormBuilder) { }
+  previewImage: any;
+  imageFile: any;
+
+  updatedMessage$: Observable<string>;
+  currentUser$: Observable<User>;
+  currentUser: User;
+
+  constructor(private formBuilder: FormBuilder, private store: Store<AppState>) { }
 
   ngOnInit(): void {
     this.setupForm();
+    this.setCurrentUserInformation();
+  }
+
+  ngOnDestroy(): void {
+    this.store.dispatch(clearMessages());
   }
 
   setupForm() {
@@ -54,17 +69,45 @@ export class ProfileComponent implements OnInit {
       return;
     }
 
-    const updatedUser = {
+    const user: User = {
       fullName: this.profileForm.controls['fullName'].value,
       email: this.profileForm.controls['email'].value,
       password: this.profileForm.controls['password'].value,
-      image: this.image,
-    }
+    };
+    let userFormData = new FormData();
+    userFormData.append('file', this.imageFile);
+    userFormData.append('user', JSON.stringify(user));
 
-    console.log(updatedUser);
+    this.store.dispatch(update({ userData: userFormData }));
   }
 
-  onFileChanged(image: any) {
+  onImageChanged(event) {
+    const file = event.target.files[0];
+    if (file.type.match(/image\/*/) == null) {
+      return;
+    }
 
+    this.imageFile = file;
+
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = (e) => {
+      this.previewImage = reader.result;
+    }
+  }
+
+  setCurrentUserInformation() {
+    this.updatedMessage$ = this.store.select(getAuthenticationSuccess);
+    this.currentUser$ = this.store.select(getAuthenticationUser);
+    this.currentUser$.subscribe(user => {
+      const cachedUser = user ? user : JSON.parse(localStorage.getItem('user'));
+      this.previewImage = this.getRefreshingURL(cachedUser.image);
+      this.profileForm.controls['fullName'].setValue(cachedUser.fullName);
+      this.profileForm.controls['email'].setValue(cachedUser.email);
+    });
+  }
+
+  getRefreshingURL(image: string) {
+    return image + '?' + (new Date().getTime());;
   }
 }

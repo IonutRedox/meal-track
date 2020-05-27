@@ -11,8 +11,12 @@ export enum AuthenticationActionTypes {
     SIGN_UP_SUCCESS = '[Authentication] Sign up Success',
     SIGN_UP_FAILURE = '[Authentication] Sign up Failure',
     SIGN_OUT = '[Authentication] Sign out',
-    CLEAR = '[Authentication] Clear'
-}
+    CLEAR = '[Authentication] Clear',
+    UPDATE = '[Authentication] Update',
+    UPDATE_SUCCESS = '[Authentication] Update Success',
+    UPDATE_FAILURE = '[Authentication] Update Failure',
+    CLEAR_MESSAGES = '[Authentication] Clear messages'
+};
 
 export const signIn = createAction(AuthenticationActionTypes.SIGN_IN, props<{ user: User }>());
 export const signInSuccess = createAction(AuthenticationActionTypes.SIGN_IN_SUCCESS, props<{ user: User }>());
@@ -22,3 +26,7 @@ export const signUpSuccess = createAction(AuthenticationActionTypes.SIGN_UP_SUCC
 export const signUpFailure = createAction(AuthenticationActionTypes.SIGN_UP_FAILURE, props<{ error: string }>());
 export const signOut = createAction(AuthenticationActionTypes.SIGN_OUT);
 export const clear = createAction(AuthenticationActionTypes.CLEAR);
+export const update = createAction(AuthenticationActionTypes.UPDATE, props<{ userData: any }>());
+export const updateSuccess = createAction(AuthenticationActionTypes.UPDATE_SUCCESS, props<{ user: User, updatedMessage: string }>());
+export const updateFailure = createAction(AuthenticationActionTypes.UPDATE_FAILURE, props<{ error: string }>());
+export const clearMessages = createAction(AuthenticationActionTypes.CLEAR_MESSAGES);
