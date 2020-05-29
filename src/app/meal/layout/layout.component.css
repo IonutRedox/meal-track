@@ -21,7 +21,7 @@ body {
   padding-bottom: 5px;
 }
 .logo-title{
-  line-height: 80%;
+  line-height: 70%;
  padding:0;
  margin:0;
 }
@@ -29,8 +29,9 @@ body {
 .logo-motto{
   padding:0;
   margin:0;
-  font-size: 12.5px;
-  text-transform: uppercase;
+  font-size: 14px;
+  font-weight:bold;
+  font-style: italic;
 }
 
 #sidebar-wrapper {
@@ -77,6 +78,10 @@ body {
   margin-left: 0;
 }
 
+#user-photo-fullName{
+text-align: center;
+}
+
 @media (min-width: 768px) {
   #sidebar-wrapper {
     margin-left: 0;
@@ -90,4 +95,24 @@ body {
   #wrapper.toggled #sidebar-wrapper {
     margin-left: -15rem;
   }
+}
+
+#salutation{
+  margin-left: 5px;
+  margin-top:15px;
+}
+
+#welcome{
+text-align: left;
+padding: 0;
+margin:0;
+}
+
+#userName{
+line-height: 50%;
+text-align: left;
+font-weight: bold;
+font-size: 15px;
+padding: 0;
+margin:0;
 }

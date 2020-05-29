@@ -13,12 +13,13 @@
         <div class="border-right" id="sidebar-wrapper">
             <div class="logo">
                 <div class="h2 logo-title">MealTrack</div>
-                <h6 class="logo-motto">Nutrients on the way</h6>
+                <h6 class="logo-motto">nutrients on the way</h6>
             </div>
-            <div class="card card-user">
-                <img [src]='currentUser.image' class="card-img-top">
-                <div class="card-body">
-                    <p class="card-text">{{ currentUser.fullName }}</p>
+            <div id="user-photo-fullName" class="mb-5 mt-2 d-flex justify-content-center">
+                <img [src]='currentUser.image' style="width: 70px; height: 70px;border: 2px solid black !important;" class="rounded-circle border img-fluid">
+                <div id="salutation">
+                    <p id="welcome">Welcome</p>
+                    <p id="userName">{{ currentUser.fullName }}</p>
                 </div>
             </div>
 

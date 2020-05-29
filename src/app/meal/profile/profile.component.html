@@ -5,13 +5,16 @@
         <div *ngIf="(updatedMessage$ | async) as message" class="alert alert-success" role="alert">
             {{ message }}
         </div>
-        <div class="d-flex flex-column">
-            <img style="width: 180px;height: 180px;" [src]="previewImage" class="img-thumbnail col-form-label">
-            <button type="button" (click)="fileInput.click()" class="btn btn-primary btn-sm"
-                style="width: 180px; background-color: teal;">
-                <span>Change image</span>
-                <input #fileInput type="file" (change)="onImageChanged($event)" style="display: none;">
-            </button>
+        <div class="d-flex flex-column col-form-label">
+            <div class="col-form-label">
+                <div class="hovereffect" (click)="fileInput.click()">
+                    <img class="img-responsive" [src]="previewImage" style="width:200px;height: 200px;" alt="">
+                    <div class="overlay">
+                        <h2>Change</h2>
+                        <input #fileInput type="file" (change)="onImageChanged($event)" style="display: none;">
+                    </div>
+                </div>
+            </div>
         </div>
         <form [formGroup]="profileForm" class="mt-4" (ngSubmit)="onSubmit()">
             <div class="form-group row">
