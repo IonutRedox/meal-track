@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MealListComponent } from './meal-list.component';
+import { StoreModule } from '@ngrx/store';
+import {  mealReducers } from '../store';
 
 describe('MealListComponent', () => {
   let component: MealListComponent;
@@ -8,9 +10,13 @@ describe('MealListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MealListComponent ]
+      declarations: [MealListComponent],
+      imports: [
+        StoreModule.forRoot({}),
+        StoreModule.forFeature('meal', mealReducers)
+      ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
