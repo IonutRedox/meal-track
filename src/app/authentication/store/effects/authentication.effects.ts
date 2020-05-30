@@ -74,7 +74,7 @@ export class AuthenticationEffects {
                     return AuthenticationActions.updateSuccess({ user: user, updatedMessage: 'You have successfully updated the profile' });
                 }),
                 catchError((error) => {
-                    return of(AuthenticationActions.signInFailure({ error: error.error.message }));
+                    return of(AuthenticationActions.updateFailure({ error: error.error.message }));
                 }));
         })));
 }

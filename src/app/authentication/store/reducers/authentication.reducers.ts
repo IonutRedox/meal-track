@@ -3,7 +3,7 @@ import { createReducer, on, Action } from '@ngrx/store';
 import * as AuthenticationActions from '../actions/authentication.actions'
 import { AppState } from '@app/app.state';
 
-const initialState: AuthenticationState = {
+export const initialState: AuthenticationState = {
     user: undefined,
     isAuthenticated: false,
     errorMessage: '',
@@ -16,7 +16,7 @@ const reducer = createReducer(
         ...state,
         user: user,
         isAuthenticated: true,
-        errorMessage: null
+        errorMessage: ''
     })),
     on(AuthenticationActions.signInFailure, (state, { error }) => ({
         ...state,
@@ -24,25 +24,25 @@ const reducer = createReducer(
     })),
     on(AuthenticationActions.signUpSuccess, (state, { user, registerMessage }) => ({
         ...state,
-        errorMessage: null,
+        errorMessage: '',
         successMessage: registerMessage
     })),
     on(AuthenticationActions.signUpFailure, (state, { error }) => ({
         ...state,
         errorMessage: error,
-        successMessage: null
+        successMessage: ''
     })),
     on(AuthenticationActions.signOut, (state) => ({
         ...state,
-        user: null,
+        user: undefined,
         isAuthenticated: false
     })),
     on(AuthenticationActions.clear, (state) => ({
         ...state,
-        user: null,
+        user: undefined,
         isAuthenticated: false,
-        errorMessage: null,
-        successMessage: null
+        errorMessage: '',
+        successMessage: ''
     })),
     on(AuthenticationActions.updateSuccess, (state, { user, updatedMessage }) => ({
         ...state,
@@ -55,8 +55,8 @@ const reducer = createReducer(
     })),
     on(AuthenticationActions.clearMessages, (state) => ({
         ...state,
-        errorMessage: null,
-        successMessage: null
+        errorMessage: '',
+        successMessage: ''
     }))
 );
 
